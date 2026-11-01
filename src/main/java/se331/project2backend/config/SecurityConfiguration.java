@@ -42,8 +42,11 @@ public class SecurityConfiguration {
                 .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                        // public: login, register (+ the profile image upload used by the register page), health check
-                        .requestMatchers("/api/auth/login", "/api/auth/register", "/uploadImage", "/api/health").permitAll()
+                        // public: login, register (+ the profile image upload used by the register page), health check (รองรับทั้ง /api และ /api/v1)
+                        .requestMatchers(
+                                "/api/auth/login", "/api/auth/register", "/uploadImage", "/api/health",
+                                "/api/v1/auth/login", "/api/v1/auth/register", "/api/v1/health"
+                        ).permitAll()
                         // role based areas
                         .requestMatchers("/api/admin/**").hasRole("ADMIN")
                         .requestMatchers("/api/exam/**", "/api/elearning/**").hasRole("USER")
