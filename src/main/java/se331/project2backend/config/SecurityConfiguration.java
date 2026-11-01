@@ -41,15 +41,25 @@ public class SecurityConfiguration {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
+                        // CORS preflight
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                        // public: login, register (+ the profile image upload used by the register page), health check (รองรับทั้ง /api และ /api/v1)
+
+                        // public: login, register, image upload (register page), health check
+                        // รองรับทั้ง /api/... และ /api/v1/...
                         .requestMatchers(
-                                "/api/auth/login", "/api/auth/register", "/uploadImage", "/api/health",
-                                "/api/v1/auth/login", "/api/v1/auth/register", "/api/v1/health"
+                                "/api/auth/**", "/api/v1/auth/**",
+                                "/uploadImage", "/api/uploadImage", "/api/v1/uploadImage",
+                                "/api/health", "/api/v1/health",
+                                "/error"
                         ).permitAll()
-                        // role based areas
-                        .requestMatchers("/api/admin/**").hasRole("ADMIN")
-                        .requestMatchers("/api/exam/**", "/api/elearning/**").hasRole("USER")
+
+                        // role based areas (ทั้ง /api และ /api/v1)
+                        .requestMatchers("/api/admin/**", "/api/v1/admin/**").hasRole("ADMIN")
+                        .requestMatchers(
+                                "/api/exam/**", "/api/elearning/**",
+                                "/api/v1/exam/**", "/api/v1/elearning/**"
+                        ).hasRole("USER")
+
                         // everything else (levels, my profile ...) just needs a valid login
                         .anyRequest().authenticated())
                 .exceptionHandling(e -> e.authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)))
