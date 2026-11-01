@@ -1,0 +1,39 @@
+server:
+  port: ${PORT:8080}
+
+spring:
+  application:
+    name: project2-backend
+  profiles:
+    active: local
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5433/selabdb}
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:password}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+  servlet:
+    multipart:
+      max-file-size: 5MB
+      max-request-size: 6MB
+
+supabase:
+  storage:
+    endpoint: ${SUPABASE_ENDPOINT:}
+    bucket: ${SUPABASE_BUCKET:}
+    region: ${SUPABASE_REGION:}
+    accessKey: ${SUPABASE_ACCESS_KEY:}
+    secretKey: ${SUPABASE_SECRET_KEY:}
+    endpoint_output: ${SUPABASE_ENDPOINT_OUTPUT:}
+
+application:
+  security:
+    jwt:
+      secret-key: ${JWT_SECRET:ZGV2LW9ubHktc2VjcmV0LWZvci1jYW10LXBhc3Nwb3J0LXNlMzMxLXByb2plY3QtMi1iZWV0YmFnZS1jb21ic3BpcmFjeS0wMDAxMjM0NTY3ODk=}
+      expiration: 86400000
+
+app:
+  cors:
+    allowed-origins: ${ALLOWED_ORIGINS:http://localhost:5173}

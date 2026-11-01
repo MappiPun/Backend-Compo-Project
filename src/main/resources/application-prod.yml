@@ -1,0 +1,35 @@
+# Production profile (Render + Supabase). No secret is written here: every value is read from an environment variable.
+server:
+  port: ${PORT:8080}
+
+spring:
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    hikari:
+      maximum-pool-size: 5
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        default_schema: se331
+
+supabase:
+  storage:
+    endpoint: ${SUPABASE_ENDPOINT}
+    bucket: ${SUPABASE_BUCKET}
+    region: ${SUPABASE_REGION}
+    accessKey: ${SUPABASE_ACCESS_KEY}
+    secretKey: ${SUPABASE_SECRET_KEY}
+    endpoint_output: ${SUPABASE_ENDPOINT_OUTPUT:}
+
+application:
+  security:
+    jwt:
+      secret-key: ${JWT_SECRET}
+
+app:
+  cors:
+    allowed-origins: ${ALLOWED_ORIGINS:http://localhost:5173}
