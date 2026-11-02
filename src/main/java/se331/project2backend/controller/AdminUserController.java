@@ -22,10 +22,6 @@ public class AdminUserController {
 
     private final UserService userService;
 
-    /**
-     * The user list. page starts at 1. The total number of the users is sent in the x-total-count header.
-     * Filters (all optional and can be combined): q = name or surname, level, province.
-     */
     @GetMapping("/users")
     public ResponseEntity<List<UserDTO>> list(@RequestParam(required = false) String q,
                                               @RequestParam(required = false) Integer level,

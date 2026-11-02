@@ -9,6 +9,5 @@ public record UserUpdateRequest(
         @Pattern(regexp = "^$|^[0-9+\\- ]{9,15}$", message = "Phone number is not valid") String phone,
         @NotBlank(message = "Province is required") String province,
         @Size(max = 1000) String profileImage,
-        /* only used by the admin edit, ignored when the user edits their own profile */
         Integer level) {
 }

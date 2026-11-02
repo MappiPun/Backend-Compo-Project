@@ -1,4 +1,3 @@
-# Production profile (Render + Supabase). No secret is written here: every value is read from an environment variable.
 server:
   port: ${PORT:8080}
 

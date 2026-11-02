@@ -17,11 +17,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * Reads the "Authorization: Bearer ..." header and authenticates the request.
- * The user is loaded from the database on every request, so a user who has just been deactivated
- * (or deleted) cannot use the API any more even if the token has not expired yet.
- */
 @Component
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {

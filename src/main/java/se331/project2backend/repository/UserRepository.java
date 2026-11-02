@@ -20,11 +20,6 @@ public interface UserRepository extends JpaRepository<AppUser, Long> {
 
     boolean existsByEmailIgnoreCaseAndIdNot(String email, Long id);
 
-    /**
-     * Filter + pagination in one JPA query.
-     * Every parameter is always non-null (the service sends "" or a level range)
-     * so that PostgreSQL can always infer the parameter types.
-     */
     @Query("""
             select u from AppUser u
             where u.role = :role

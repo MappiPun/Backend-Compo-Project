@@ -6,10 +6,6 @@ import se331.project2backend.entity.*;
 
 import java.util.List;
 
-/**
- * Converts the entities to the DTOs. The entities are never returned directly from the controllers,
- * so the relationships (user - exam history, level - benefits ...) can never produce an infinite loop in the JSON.
- */
 @Component
 public class DtoMapper {
 
